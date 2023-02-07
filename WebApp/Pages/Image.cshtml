@@ -1,0 +1,6 @@
+@page "{ImageId?}"
+@using ShopBase.Model
+@model WebApp.Pages.ImageModel
+@{
+    ViewData["Title"] = Model.ImageId != null ? $"Bild ID '{Model.ImageId}'" : "Bild";
+}

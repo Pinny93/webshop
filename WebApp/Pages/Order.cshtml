@@ -1,0 +1,46 @@
+@page
+@using ShopBase
+@model WebApp.Pages.OrderModel
+@{
+    ViewData["Title"] = "Bestellungen";
+}
+<h1>Bestellungen</h1>
+
+@if(Model.Orders.Any())
+{
+    @foreach (var order in Model.Orders)
+    {
+        <div style="min-width: 100px; background-color: whitesmoke; margin: 5px; padding: 10px; border: 1px solid gray;">
+            <div>
+                <span style="font-weight: bold; font-size: x-large;">Bestellung #@order.Id.ToString("00000000")</span>
+                <span>@order.Status</span>
+                <span style="margin-left: 20px">Bestellt am @(order.BestellDatum?.ToShortDateString() ?? "St. Nimmerleinstag")</span>
+                <span style="float: right;">@order.Positionen.Sum(pos => pos.TotalPrice).ToString("#0.00") EUR</span>
+            </div>
+            <div>
+                @if(order.Status == BestellStatus.Bestellt)
+                {
+                    <div style="float: right; margin-left: 5px;">
+                        <form method="post"><button class="btn btn-primary" type="submit" asp-page-handler="CancelOrder" asp-route-id="@order.Id">Stornieren</button></form>
+                    </div>
+                    <div style="float: right; margin-left: 5px;">
+                        <form method="post"><button class="btn btn-primary" type="submit" asp-page-handler="PayOrder" asp-route-id="@order.Id">Zahlen</button></form>
+                    </div>
+                }
+                @if(order.Status == BestellStatus.Gezahlt || order.Status == BestellStatus.Storniert)
+                {
+                    <div style="float: right;">
+                        <form method="post"><button class="btn btn-primary" type="submit" asp-page-handler="AchiveOrder" asp-route-id="@order.Id">Archivieren</button></form>
+                    </div>
+                }
+                <span style="font-weight: bold;">@order.Positionen.Sum(pos => pos.Menge) Artikel</span>
+                <ul>
+                    @foreach (var pos in order.Positionen)
+                    {
+                        <li>@(pos.Menge)x @pos.Artikel.Bezeichnung</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}

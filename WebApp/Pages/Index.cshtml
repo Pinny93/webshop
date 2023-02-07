@@ -1,0 +1,25 @@
+﻿@page
+@using ShopBase.Model
+@using FWI2Helper;
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div>
+    <h1 class="display-4">Herzlich Willkommen</h1>
+    <h2>in unseren Früchteshop!</h2>
+    <p>
+        In unseren Früchteshop haben Sie eine große Auswahl an heimischen und tropischen Früchten. <br />
+        Momentan stehen @Model.LstArtikel.Count Artikel zur Auswahl.
+    </p>
+    <p>
+        <a asp-page="/Search">Suchen</a> Sie nach ihren Favoriten! Es gibt:
+        <ul>
+            @foreach (Artikel curArt in Model.LstArtikel)
+            {
+                <li>@curArt.Bezeichnung</li>
+            }
+        </ul>
+    </p>
+</div>

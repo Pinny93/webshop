@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b0818c0e-2b3f-46e1-b2f0-a0e957b71eee</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<DockerfileFile>..\Dockerfile</DockerfileFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\nuget.config" Link="nuget.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+	  <PackageReference Include="FWI2Helper" Version="1.0.2-CI-*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShopBase\ShopBase.csproj" />
+  </ItemGroup>
+
+</Project>

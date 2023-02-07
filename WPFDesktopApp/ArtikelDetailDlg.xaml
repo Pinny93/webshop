@@ -1,0 +1,44 @@
+﻿<Window x:Class="WPFDesktopApp.ArtikelDetailDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Artikel Details" Height="350" Width="450">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label VerticalAlignment="Top" Content="ID:" Width="100" />
+            <TextBox x:Name="_tbId" Margin="2" TextWrapping="Wrap" Text="TextBox" Width="50" IsReadOnly="True" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Bezeichnung:" VerticalAlignment="Top" Width="100" />
+            <TextBox x:Name="_tbName" Margin="2" TextWrapping="Wrap" Text="TextBox" Width="200" />
+        </StackPanel>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+            <Label Content="Beschreibung:" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" />
+            <TextBox x:Name="_tbDesc" Margin="2" TextWrapping="Wrap" Text="TextBox" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Visible" Height="50" />
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Bewertung:" VerticalAlignment="Top" Width="100" />
+            <Label x:Name="_lbRating" Content="1/5" VerticalAlignment="Center" />
+            <Slider x:Name="_slRating" Maximum="5" Minimum="1" Width="150" VerticalAlignment="Center" ValueChanged="_slRating_ValueChanged" SmallChange="1" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Preis:" VerticalAlignment="Top" Width="100" />
+            <TextBox x:Name="_tbPrice" Margin="2" TextWrapping="Wrap" Text="TextBox" Width="80" />
+            <Label Content="EUR" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="Bild:" VerticalAlignment="Top" Width="100" />
+            <Border BorderThickness="1" BorderBrush="Gray" Margin="3">
+                <Image Width="100" Height="100" x:Name="_imgArticleImage" />
+            </Border>
+            <Button Content="Durchsuchen..." HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" x:Name="_btUploadImage" Click="OnBtUploadTest_Click" />
+        </StackPanel>
+        <DockPanel>
+            <Button x:Name="_btCancel" DockPanel.Dock="Right" Padding="3" Margin="5" Width="100"  Content="Abbrechen" VerticalAlignment="Bottom" Click="OnBtCancel_Click" IsCancel="True" />
+            <Button x:Name="_btOk" DockPanel.Dock="Right" Padding="3" Margin="5" Width="100"  Content="OK" VerticalAlignment="Bottom" Click="OnBtOk_Click" IsDefault="True" />
+            <Label />
+        </DockPanel>
+    </DockPanel>
+</Window>

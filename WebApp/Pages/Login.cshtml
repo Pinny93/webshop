@@ -1,0 +1,34 @@
+﻿@page "{RedirectAfterLogin?}"
+@model WebApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Anmelden";
+}
+
+@if(Model.CurrentUser != null)
+{
+    <h1>Willkommen @(Model.CurrentUser.Vorname)!</h1>
+    <p>Sie sind nun angemeldet und können sich was zum shoppen <a asp-page="/Search">suchen</a>.</p>
+    <br />
+    <br />
+
+    <p>Angemeldet als @Model.CurrentUser.ToString() </p>
+    <form method="post"><button asp-page-handler="Logout" class="btn btn-primary">Abmelden</button></form>
+}
+else
+{
+    <h1>Anmelden</h1>
+
+    <form method="post">
+            <div class="form-group">
+                <label for="login">E-Mail</label>
+                <input type="text" class="form-control" id="login" asp-for="@Model.Login">
+            </div>
+            <div class="form-group">
+                <label for="vorname">Passwort</label>
+                <input type="password" class="form-control" id="vorname" asp-for="@Model.Passwort">
+            </div>
+        <button type="submit" class="btn btn-primary mt-3" asp-page-handler="login">Anmelden</button>
+        <div>Passwort vergessen? Pech gehabt.</div>
+        <div>Kein Konto? <a asp-page="Register">Registrieren</a></div>
+    </form>
+}

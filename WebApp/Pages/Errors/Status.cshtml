@@ -1,0 +1,10 @@
+@page "{ErrorStatusCode?}"
+@using ShopBase.Model
+@model WebApp.Pages.StatusModel
+@{
+    ViewData["Title"] = Model.ErrorStatusCode != null ? $"Fehler {Model.ErrorStatusCode}" : "Fehler";
+}
+
+<h1>Fehler @Model.ErrorStatusCode</h1>
+<p>Hoppla, da ging was schief...</p>
+<a href="~/Index" >&lt; Zurück</a>

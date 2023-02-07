@@ -1,0 +1,17 @@
+@using Misc
+@model WebshopBasePageModel
+
+@{ RenderMessages(Model.MessageList); }
+
+@functions
+{
+    void RenderMessages(IEnumerable<PageMessage> messages) 
+    {
+        foreach (var curMessage in messages.OrderByDescending(msg => msg.Type))
+        {
+            <div class="alert alert-@curMessage.Type.ToString().ToLower()" role="alert">
+                                    @curMessage.Message
+            </div>
+        }
+    }
+}

@@ -1,0 +1,44 @@
+﻿@page
+@model WebApp.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Registrieren";
+}
+
+@if (!Model.RegisterSucessful)
+{
+    <h1>@ViewData["Title"]</h1>
+
+    <form method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" asp-for="@Model.FormKunde.Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="vorname">Vorname</label>
+                <input type="text" class="form-control" id="vorname" asp-for="@Model.FormKunde.Vorname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Adresse</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" asp-for="@Model.FormKunde.EMail">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Passwort</label>
+                <input type="password" class="form-control" id="password" asp-for="@Model.Password">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="vorname">Passwort wiederholen</label>
+                <input type="password" class="form-control" id="paswordconfirm" asp-for="@Model.PasswordConfirm">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" asp-page-handler="register">Registrieren</button>
+    </form>
+}
+else
+{
+    <h1>Erfolgreich registriert</h1>
+    <p>Vielen Dank für Ihre Registrierung.</p>
+    <p>Sie können sich nun <a asp-page="/Login">anmelden</a></p>
+}

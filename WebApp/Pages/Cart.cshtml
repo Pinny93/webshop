@@ -1,0 +1,52 @@
+﻿@page
+@using ShopBase.Model
+@model WebApp.Pages.CartModel
+@{
+}
+
+<h1>Warenkorb</h1>
+@if(this.Model.Cart.Positionen.Count == 0)
+{
+    <p>Der Korb ist leer! <a asp-page="/Search">Suchen</a> Sie sich zuerst was aus.</p>
+}
+else
+{
+    decimal totalPrice = 0m;
+
+    <form method="post">
+        <table style="width: 100%; margin-bottom: 10px; border: 1px solid black; border-collapse: collapse;">
+            <tr style="background-color: royalblue; color: white; padding: 5px;">
+                <th style="width: 10%; text-align: left; padding: 5px;">Anzahl</th>
+                <th style="width: 60%; text-align: left; padding: 5px;">Artikel</th>
+                <th style="width: 10%; text-align: center; padding: 5px;">Einzelpreis</th>
+                <th style="width: 10%; text-align: center; padding: 5px;">Gesamtpreis</th>
+                <th style="width: 10%;"></th>
+            </tr>
+            @foreach (BestellPos pos in Model.Cart.Positionen)
+            {
+                if(pos.Artikel == null) { continue; }
+
+                decimal totalArticlePrice = pos.Artikel.Preis * pos.Menge;
+                totalPrice += totalArticlePrice;
+
+                <tr>
+                    <td style="padding: 5px;">@pos.Menge</td>
+                    <td>@pos.Artikel.Bezeichnung</td>
+                    <td style="padding: 5px; text-align: right;">@pos.Artikel.Preis.ToString("#0.00") EUR</td>
+                    <td style="padding: 5px; text-align: right;">@(totalArticlePrice.ToString("#0.00")) EUR</td>
+                    <td style=" text-align: right;"><button type="submit" class="btn btn-secondary" style="text-align: right;" asp-route-id="@pos.Artikel.Id" asp-page-handler="RemoveFromCart">Löschen</button></td>
+                </tr>
+            }
+
+            <tr style="background-color: royalblue; color: white; padding: 5px;">
+                <th colspan=2 style="text-align: left; padding: 5px;">Gesamtpreis:</th>
+                <th colspan=2 style="text-align: right; padding: 5px;">@totalPrice.ToString("#0.00") EUR</th>
+                <th></th>
+            </tr>
+        </table>
+
+        <button type="submit" class="btn btn-primary" asp-page-handler="ContinueShopping" asp-route-searchterm="@Model.LastSearch?.SearchTerm" asp-route-curpage="@Model.LastSearch?.Page">Weitershoppen</button>
+        <button type="submit" class="btn btn-primary" asp-page-handler="ExecuteOrder" asp-page="Order">Zahlungspflichtig bestellen</button>
+    </form>
+    
+}

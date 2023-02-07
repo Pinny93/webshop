@@ -1,0 +1,33 @@
+@page
+@using System.Reflection
+@using FWI2Helper
+@model ImpressumModel
+@{
+    ViewData["Title"] = "Impressum";
+
+    string informal = Assembly.GetExecutingAssembly()?.GetInformalVersion() ?? "(unknown)";
+    string version = Assembly.GetExecutingAssembly()?.GetAssemblyVersion()?.ToString() ?? "(unknown)";
+}
+<h1>@ViewData["Title"]</h1>
+<h3>@Model.Environment.ApplicationName</h3>
+<br />
+<p>Diese Seite wird von einem Früchtefreund betrieben, der anonym bleiben will.</p>
+
+<br />
+
+<div class="Container">
+    <div class="row">
+        <div class="col-2" style="font-weight: bold">App Version:</div>
+        <div class="col" style="">@version (@informal)</div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">FWI2Helper Version:</div>
+        <div class="col" style="">@typeof(Utils).Assembly.GetInformalVersion()</div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-2">Environment:</div>
+        <div class="col" style="">@Model.Environment.EnvironmentName</div>
+    </div>
+</div>
