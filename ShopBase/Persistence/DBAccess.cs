@@ -85,10 +85,10 @@ public class DBAccess<T>
     {
         MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder()
         {
-            Server = "bszw.ddns.net",
-            Database = "fwi2123_pinzer",
-            UserID = "fwi2123",
-            Password = "geheim",
+            Server = "DOMAIN",
+            Database = "DB",
+            UserID = "UID",
+            Password = "PW",
         };
 
         MySqlConnection con = new MySqlConnection(builder.ConnectionString);
